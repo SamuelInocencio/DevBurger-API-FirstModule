@@ -4,7 +4,7 @@ module.exports = {
   port: 5432,
   username: 'admin',
   password: '123456',
-  database: 'dev-burguer-db',
+  database: 'devburguer-db',
   define: {
     timestamps: true,
     underscored: true,
