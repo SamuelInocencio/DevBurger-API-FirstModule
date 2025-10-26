@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import { v4 } from 'uuid';
 import * as Yup from 'yup';
 
@@ -23,14 +24,16 @@ class UserController {
     const existingUser = await User.findOne({ where: { email } });
 
     if (existingUser) {
-      return response.status(400).json({ message: "Email already taken!" });
+      return response.status(400).json({ message: 'Email already taken!' });
     }
+
+    const password_hash = await bcrypt.hash(password, 10);
 
     const user = await User.create({
       id: v4(),
       name,
       email,
-      password,
+      password_hash,
       admin,
     });
     return response.status(201).json({
